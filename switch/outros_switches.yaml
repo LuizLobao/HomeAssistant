@@ -1,0 +1,24 @@
+  - platform: broadlink
+    host: !secret host_broadlink
+    mac: !secret mac_broadlink_suite 
+    type: rm_mini
+    timeout: 15
+    # switches:
+    #   volumeoi:
+    #     friendly_name: "Oi Volume"
+    #     command_on: "JgAWAQ8JBCQGDgQKBhQHBgUzBRQHDQQVBgkFDwQAC7wQBgYKBhQFDwYGBRYHBggIBgkGEwcTBg4GEwcGBw4GCQYIBgALng4JBwcHEwYOBggHEwcGBQsHBgcUBhMHDQYUBgcHDgcHBgALrBAHCAYIEwcNBgcIEwUJBQoFCQYUBhMHDQcSBwYFEQcGBwkFAAueDwgHBwcUBg0HBggTBwYIBwgGCBMGFAYOBhMHBgcOBggIBgcAC54PBwgGBxQHDQcGCBMHBggHBwgGFAcSBw0HEwYHCA0HBgcJBQALng8JBgcIEwYOBgcHFAYHCAYHCQYUBRQGDgUUBwYHDwUJBwcGAAueDQsECgVQBQoFCQUKBWkFDwUIBQwEAA0FAAA="
+    #     command_off: "JgCMAA4KBCQEHgQWBE8EEAQWBB8EHgQAC6APCAcHBxMHDQcGBRYHBgUMBgYIBwgTBg0HEwcGCA0GCAcOBQALng0ADNcPCQYHBxQGDgYGCBQGBwgGCAcIBgcUBg4HEgcGBw8GBwgNBwALnA4yBBAEJARPBBAEFgQfBAALwg4xBDgETwQQBBYGBwYPBAsEAA0FAAAAAAAAAAAAAAAA"
+    #   canaloi:
+    #     friendly_name: "Oi Canal"
+    #     command_on:  "JgCCAA4KBSIEEAQLBBUECwRMBSgFCQQkBAALjQ0yBBAFIwUJBDMEFQQQBBUECwUVBBgEAAt+DgoFIwQfBBUECwUJBCQEFgUoBQkEFgQAC5sNMgQQBDIECwQKBhQEFQQQBBYECwUUBRgEAAt+DjIEEAQLBBUEGQQkBBYEEAQVBCQEGQQADQUAAAAAAAA="
+    #     command_off: "JgB6ABAHCAYIEwcNBQkHEwYHCAYIBwgGCBMGDgcTBgcHEwcGCQ0HAAucDgoECwQWBQ4EJAQoBAoEFgQQBBUEJAQeBAALoA4JBggFFQY2BwYFCwUJBAsEFQQQBhQEJQUdBQALng8XBBYEDwQkBCgEJAQQBBUEJAYIBBEFAA0FAAAAAAAAAAAAAAAAAAA="
+
+    
+  - platform: mqtt
+    name: "Sonoff2"
+    command_topic: "cmnd/sonoff2/power"
+    state_topic: "stat/sonoff2/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: false

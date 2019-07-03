@@ -1,0 +1,50 @@
+
+
+  ########################## SUITE DO CASAL ################################
+  - platform: mqtt
+    name: "Closet"
+    command_topic: "cmnd/closet/POWER"
+    state_topic: "stat/closet/POWER"
+    availability_topic: "tele/closet/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: false
+    icon: mdi:tshirt-crew
+    
+  - platform: mqtt
+    name: "SuiteTeto"
+    command_topic: "cmnd/Suite/POWER1"
+    state_topic: "stat/Suite/POWER1"
+    availability_topic: "tele/Suite/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: false
+    icon: mdi:lightbulb-on
+
+  - platform: mqtt
+    name: "SuiteLED"
+    command_topic: "cmnd/Suite/POWER2"
+    state_topic: "stat/Suite/POWER2"
+    availability_topic: "tele/Suite/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: false
+    icon: mdi:led-on
+
+  - platform: mqtt
+    name: "SuiteAbajur"
+    command_topic: "cmnd/Suite/POWER3"
+    state_topic: "stat/Suite/POWER3"
+    availability_topic: "tele/Suite/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: false
+    icon: mdi:ceiling-light

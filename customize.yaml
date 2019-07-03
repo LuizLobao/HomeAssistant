@@ -1,0 +1,9 @@
+
+    switch.sonoff_100035a097_1:
+      friendly_name: Cozinha1
+
+    switch.sonoff_100035a097_2:
+      friendly_name: Cozinha2
+
+    switch.sonoff_100035a097_3:
+      friendly_name: Cozinha3

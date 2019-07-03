@@ -1,0 +1,142 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude
+  longitude: !secret longitude 
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 0
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: America/Sao_Paulo
+  # Customization file
+  customize: !include customize.yaml
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Show the introduction message on startup.
+#introduction:
+
+cloud:
+
+
+hacs:
+  token: !secret hacs_token
+  theme: True
+
+recorder:
+  purge_keep_days: 3
+  purge_interval: 3
+  exclude:
+    entities:
+      - sun.sun # Don't record sun data
+
+influxdb:
+  host: a0d7b954-influxdb
+  port: 8086
+  database: homeassistant
+  username: homeassistant
+  password: !secret influx_psw
+  max_retries: 3
+  default_measurement: state
+
+# Discover some devices automatically
+discovery:
+
+frontend:
+  themes: !include_dir_merge_named themes/ #!include themes.yaml
+ 
+sensor: !include_dir_merge_list sensor/ #!include sensor.yaml
+group: !include_dir_merge_named groups/ #!include groups.yaml
+automation: !include_dir_merge_list automations/ #!include automations.yaml
+script: !include_dir_merge_named scripts/ #!include scripts.yaml
+switch: !include_dir_merge_list switch/ #!include switch.yaml
+zone: !include_dir_merge_list zone/ #!include zone.yaml
+input_boolean: !include_dir_merge_named input_boolean/ #!include input_boolean.yaml
+input_number: !include_dir_merge_named input_number/ #!include input_number.yaml
+binary_sensor: !include_dir_merge_list binary_sensor/  #!include binary_sensor.yaml
+camera: !include_dir_merge_list camera/ #!include camera.yaml
+
+
+
+weather:
+  - platform: darksky
+    api_key: !secret api_dark_sky
+    latitude: !secret latitude
+    longitude: !secret longitude
+    units: si
+    mode: hourly
+
+# Text to speech
+tts:
+  - platform: google_translate
+    service_name: google_say
+    language: pt-br
+
+  - platform: watson_tts
+    watson_apikey: !secret watson_api
+    voice: pt-BR_IsabelaVoice
+
+
+panel_iframe:
+  tasmoadmin:
+    title: TasmoAdmin
+    icon: mdi:lightbulb-on
+    url: !secret ip_tasmoadmin
+
+  grafana:
+    title: Grafana
+    icon: mdi:chart-timeline
+    url: !secret ip_grafana
+
+life360:
+  accounts:
+    - username: !secret life360_usr
+      password: !secret life360_psw
+
+device_tracker:
+  - platform: bluetooth_tracker
+    
+
+media_player:
+# Mopidy Media Player
+  - platform: mpd
+    host: !secret ip_media_player
+    name: Music Player
+
+sonoff:
+  username: !secret sonoff_usr
+  password: !secret sonoff_psw
+  #scan_interval: 60 #(optional, lower values than 60 won't work anymore!)
+  #grace_period: 600 #(optional)
+  api_region: 'us'
+  #entity_prefix: True (optional)
+  #debug: False (optional)
+
+speedtestdotnet:
+  scan_interval:
+    minutes: 30
+  monitored_conditions:
+    - ping
+    - download
+    - upload
+
+tuya:
+  username: !secret usu_tuya
+  password: !secret senha_tuya
+  country_code: 55
+  platform: smart_life
+
+ios:
+  push:
+    categories:
+      - name: cameras
+        identifier: 'camera'
+        actions:
+          - identifier: 'TTS_MESSAGE'
+            title: 'GoogleHome TTS Message'
+            behavior: 'textInput'
+            textInputButtonTitle: 'Send TTS'
+            textInputPlaceholder: 'O que você está fazendo na minha casa ? As autoridades serão chamadas em 5 segundos.'

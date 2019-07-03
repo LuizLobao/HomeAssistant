@@ -1,0 +1,9 @@
+resources:
+  - url: /customcards/github/custom-cards/button-card.js?track=true
+    type: module
+
+- url: /community_plugin/button-card/button-card.js
+  type: module
+
+- url: /community_plugin/compact-custom-header/compact-custom-header.js
+  type: module

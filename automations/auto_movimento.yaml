@@ -1,0 +1,98 @@
+  - alias: Reset Sensor de Movimento
+    hide_entity: false
+    initial_state: 'on'
+    trigger:
+      platform: state
+      entity_id: binary_sensor.sensor_movimento
+      from: 'off'
+      to: 'on'
+      for: 
+        seconds: 15
+    action:
+      service: mqtt.publish
+      data:
+        topic: tele/RF_Bridge/RESULT
+        payload: EC472Eoff
+
+  - alias: Movimento Camera Escritorio
+    id: movimentocameraescritorio238409284
+    initial_state: true
+    trigger:
+      platform: state
+      entity_id: binary_sensor.sensor_movimento
+    condition:
+      condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.casa_ocupada ######################
+        state: 'off'
+      - condition: state
+        entity_id: input_boolean.guests  #flag pra dizer que temos visitas em casa.
+        state: 'off'
+    action:
+      service: notify.ios_iphone7lobao
+      data:
+        title: "ALERTA"
+        message: "Movimento no Escritorio"
+        data:
+          attachment:
+            content-type: jpeg
+            url: !secret url_jpg_cam_escritorio
+            hide-thumbnail: false
+        #   push:
+        #     category: camera
+        #   entity_id: camera.office_cam
+
+  - alias: Movimento Camera Cozinha
+    id: movimentocameracozinha238409284
+    initial_state: true
+    trigger:
+      platform: state
+      entity_id: binary_sensor.sensor_cozinha
+    condition:
+      condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.casa_ocupada
+        state: 'off'
+      - condition: state
+        entity_id: input_boolean.guests  #flag pra dizer que temos visitas em casa.
+        state: 'off'
+    action:
+      service: notify.ios_iphone7lobao
+      data:
+        title: ALERTA
+        message: Movimento na Cozinha
+        data:
+          attachment:
+            content-type: jpeg
+          push:
+            category: camera
+          entity_id: camera.kitchen_cam
+
+  - alias: Movimento Camera Sala
+    id: movimentocamerasala238409284
+    initial_state: true
+    trigger:
+      platform: state
+      entity_id: binary_sensor.sensor_sala
+    condition:
+      condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.casa_ocupada
+        state: 'off'
+      - condition: state
+        entity_id: input_boolean.guests  #flag pra dizer que temos visitas em casa.
+        state: 'off'
+    action:
+      service: notify.ios_iphone7lobao
+      data:
+        title: ALERTA
+        message: Movimento na Sala
+        data:
+          attachment:
+            content-type: jpeg
+          push:
+            category: camera
+          entity_id: camera.livingroom_cam

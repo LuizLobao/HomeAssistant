@@ -1,0 +1,24 @@
+
+
+    ####################### cozinha ########################
+  - platform: mqtt
+    name: "Campainha"
+    command_topic: "cmnd/campainha/power"
+    state_topic: "stat/campainha/POWER"
+    availability_topic: "tele/campainha/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: false
+    icon: mdi:door
+    
+  - platform: mqtt
+    name: "Cozinha2"
+    command_topic: "cmnd/sonoff/power"
+    state_topic: "stat/sonoff/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: false
+    icon: mdi:lightbulb-on

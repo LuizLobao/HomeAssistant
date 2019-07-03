@@ -1,0 +1,21 @@
+  - platform: mqtt
+    state_topic: tele/RF_Bridge/RESULT
+    name: 'Porta Cozinha'
+    value_template: '{{value_json.RfReceived.Data}}'
+    payload_on: '346C0A'
+    payload_off: '346C0E'
+    device_class: door
+    #optmistic: False
+    qos: 1
+    #etain: False
+
+  - platform: mqtt
+    state_topic: tele/RF_Bridge/RESULT
+    name: 'Porta Sala'
+    value_template: '{{value_json.RfReceived.Data}}'
+    payload_on: '34190A'
+    payload_off: '34190E'
+    device_class: door
+    #optmistic: False
+    qos: 1
+    #retain: False

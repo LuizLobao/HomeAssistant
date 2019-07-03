@@ -1,0 +1,64 @@
+
+
+
+
+  ########################## ESCRITORIO ################################
+  - platform: mqtt
+    name: "Escritorio Teto"
+    command_topic: "cmnd/Escritorio/POWER1"
+    state_topic: "stat/Escritorio/POWER1"
+    availability_topic: "tele/Escritorio/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: false
+    icon: mdi:lightbulb-on
+
+  - platform: mqtt
+    name: "Escritorio Cubo"
+    command_topic: "cmnd/Escritorio/POWER2"
+    state_topic: "stat/Escritorio/POWER2"
+    availability_topic: "tele/Escritorio/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: false
+    icon: mdi:led-on
+
+  - platform: mqtt
+    name: "Escritorio Abajur"
+    command_topic: "cmnd/Escritorio/POWER3"
+    state_topic: "stat/Escritorio/POWER3"
+    availability_topic: "tele/Escritorio/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: false
+    icon: mdi:desk-lamp
+    
+  - platform: mqtt
+    name: "Tomada Abajur"
+    command_topic: "cmnd/Tomada_Abajur/POWER"
+    state_topic: "stat/Tomada_Abajur/POWER"
+    availability_topic: "tele/Tomada_Abajur/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: false
+    icon: mdi:power-socket-us
+
+  - platform: mqtt
+    name: "Ventilador"
+    command_topic: "cmnd/ventilador/POWER"
+    state_topic: "stat/ventilador/POWER"
+    availability_topic: "tele/ventilador/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: false
+    icon: mdi:fan

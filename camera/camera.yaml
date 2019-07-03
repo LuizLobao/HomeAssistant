@@ -1,0 +1,14 @@
+  - platform: ffmpeg
+    input: !secret camera_escritorio
+    extra_arguments: -filter:a highpass=f=300,lowpass=f=2500,volume=volume=2 -codec:a libmp3lame -ar 16000
+    name: office_cam
+
+  - platform: ffmpeg
+    input: !secret camera_sala
+    extra_arguments: -filter:a highpass=f=300,lowpass=f=2500,volume=volume=2 -codec:a libmp3lame -ar 16000
+    name: livingroom_cam
+
+  - platform: ffmpeg
+    input: !secret camera_cozinha
+    extra_arguments: -filter:a highpass=f=300,lowpass=f=2500,volume=volume=2 -codec:a libmp3lame -ar 16000
+    name: kitchen_cam

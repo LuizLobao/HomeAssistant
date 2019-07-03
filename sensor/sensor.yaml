@@ -1,0 +1,63 @@
+  # Weather prediction
+  - platform: yr
+
+  # Informa o tempo de carro saindo de casa até o Consultorio da Tati
+  - platform: waze_travel_time
+    origin: !secret home_lat_long
+    destination: -23.0103242, -43.3059852
+    region: 'NA'
+    name: 'Tempo até Consutorio'  
+  
+  # Informa o tempo de carro saindo de casa até o Oi do Leblon
+  - platform: waze_travel_time
+    origin: !secret home_lat_long
+    destination: -22.981758, -43.2215817
+    region: 'NA'
+    name: 'Tempo até Oi'
+
+  - platform: time_date
+    display_options:
+      - 'time'
+      - 'date'
+      - 'date_time'
+      - 'date_time_iso'
+      - 'time_date'
+      - 'time_utc'
+      - 'beat'    
+
+#  - platform: random
+
+# Alarm Clock
+  - platform: time_date
+    display_options:
+      - 'time'
+  - platform: template
+    sensors:
+      alarm_clock_hour:
+        value_template: '{{ states.input_number.alarm_clock_hour.state | int }}'
+      alarm_clock_minute:
+        value_template: '{{ states.input_number.alarm_clock_minute.state | int }}'
+      
+      alarm_clock_time:
+        value_template: >-
+          {{ states.sensor.alarm_clock_hour.state }}:
+          {%- if states.sensor.alarm_clock_minute.state|length == 1 -%}
+            0
+          {%- endif -%}
+            {{ states.sensor.alarm_clock_minute.state }}
+      
+      alarm_clock_time_less_5:
+        value_template: >-
+          {%if (states("input_number.alarm_clock_minute") | int >= 5) %}
+          {{ "%0.02d:%0.02d" | format(states("input_number.alarm_clock_hour") | int, states("input_number.alarm_clock_minute") | int -5) }}
+          {% else %}
+          {{ "%0.02d:%0.02d" | format(states("input_number.alarm_clock_hour") | int -1, states("input_number.alarm_clock_minute") | int +55) }}
+          {% endif %}
+      
+      alarm_clock_time_less_30:
+        value_template: >-
+          {%if (states("input_number.alarm_clock_minute") | int >= 30) %}
+          {{ "%0.02d:%0.02d" | format(states("input_number.alarm_clock_hour") | int, states("input_number.alarm_clock_minute") | int -30) }}
+          {% else %}
+          {{ "%0.02d:%0.02d" | format(states("input_number.alarm_clock_hour") | int -1, states("input_number.alarm_clock_minute") | int +30) }}
+          {% endif %}

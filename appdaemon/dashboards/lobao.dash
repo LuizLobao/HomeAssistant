@@ -1,0 +1,110 @@
+##
+## Main arguments, all optional
+##
+title: Main Panel
+widget_dimensions: [120, 120]
+widget_size: [1, 1]
+widget_margins: [5, 5]
+columns: 8
+global_parameters:
+    use_comma: 0
+    precision: 1
+    #use_hass_icon: 1
+    namespace: default
+    devices:
+      media_player:
+        step: 5
+
+escritorio_teto:
+    widget_type: switch
+    title: Escritorio Teto
+    entity: switch.escritorio_teto
+    icon_on: mdi-lightbulb-on-outline
+    icon_off: mdi-lightbulb-outline
+
+escritorio_cubo:
+    widget_type: switch
+    title: Escritorio Cubo
+    entity: switch.escritorio_cubo
+    icon_on: mdi-lightbulb-on-outline
+    icon_off: mdi-lightbulb-outline
+
+escritorio_abajur:
+    widget_type: switch
+    title: Escritorio Abajur
+    entity: switch.escritorio_abajur
+    icon_on: mdi-lightbulb-on-outline
+    icon_off: mdi-lightbulb-outline
+
+suiteteto:
+    widget_type: switch
+    title: Suite Teto
+    entity: switch.suiteteto
+    icon_on: mdi-lightbulb-on-outline
+    icon_off: mdi-lightbulb-outline
+
+suiteabajur:
+    widget_type: switch
+    title: Suite Abajur
+    entity: switch.suiteabajur
+    icon_on: mdi-lightbulb-on-outline
+    icon_off: mdi-lightbulb-outline
+
+suiteled:
+    widget_type: switch
+    title: Suite LED
+    entity: switch.suiteled
+    icon_on: mdi-lightbulb-on-outline
+    icon_off: mdi-lightbulb-outline
+
+bed_light:
+    widget_type: switch
+    title: Led Cama
+    entity: switch.03200189dc4f2218b511
+    icon_on: mdi-lightbulb-on-outline
+    icon_off: mdi-lightbulb-outline
+
+cafeteira:
+    widget_type: switch
+    title: Cafeteira
+    entity: switch.03200189ecfabc925a4a
+    icon_on: mdi-coffee
+    icon_off: mdi-coffee-outline
+    #widget_style: "background: white;"
+
+luiza_led:
+    widget_type: switch
+    title: Luiza Led
+    entity: switch.luiza_led
+    icon_on: mdi-lightbulb-on-outline
+    icon_off: mdi-lightbulb-outline
+
+visita:
+    widget_type: switch
+    title: Visitas
+    entity: input_boolean.guests
+    icon_on: mdi-account-multiple-check
+    icon_off: mdi-account-multiple-outline
+
+feriado:
+    widget_type: switch
+    title: Feriado
+    entity: input_boolean.feriado
+    icon_on: mdi-beach
+    icon_off: mdi-beach
+
+cafeteira_ok:
+    widget_type: switch
+    title: Cafeteira OK ?
+    entity: input_boolean.cafeteira_ok
+    icon_on: mdi-cup
+    icon_off: mdi-cup-off
+
+
+layout: 
+    - clock.clock(2x2), escritorio_teto, escritorio_cubo, escritorio_abajur
+    - suiteteto, suiteabajur, suiteled, bed_light
+    - switch.sonoff_100035a097_1, switch.sonoff_100035a097_2, switch.sonoff_100035a097_3, cafeteira
+    - luiza_led
+    - device_tracker.tatiana, device_tracker.luiz_lobao, visita, feriado, cafeteira_ok
+    - sensor.tempo_ate_consutorio, sensor.tempo_ate_oi

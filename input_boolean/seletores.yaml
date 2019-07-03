@@ -1,0 +1,28 @@
+guests:
+  name: Temos Visitas ?
+  initial: off
+  icon: mdi:account-multiple
+
+casa_ocupada:
+  name: Casa Ocupada ?
+  icon: mdi:account-multiple
+
+feriado:
+  name: É Feriado ?
+  icon: mdi:beach
+
+cafeteira_ok:
+  name: Cafeteira Pronta ?
+  icon: mdi:coffee-outline
+
+campainha_recente:
+  name: Campainha Recente ?
+  icon: mdi:door
+
+auto_abajur_escritorio:
+  name: Auto Abajur Escritorio
+  icon: mdi:desk-lamp
+
+auto_aviso_porta_aberta:
+  name: TTS Porta Aberta
+  icon: mdi:door

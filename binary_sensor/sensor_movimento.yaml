@@ -1,0 +1,26 @@
+  - platform: ffmpeg_motion
+    input: !secret camera_cozinha
+    name: sensor_cozinha
+    changes: 10
+
+  - platform: ffmpeg_motion
+    input: !secret camera_sala
+    name: sensor_sala
+    changes: 10
+
+  - platform: ffmpeg_motion
+    input: !secret camera_escritorio
+    name: sensor_escritorio
+    changes: 10
+
+
+  - platform: mqtt
+    state_topic: tele/RF_Bridge/RESULT
+    name: 'Sensor Movimento'
+    value_template: '{{value_json.RfReceived.Data}}'
+    payload_on: 'EC472E'
+    payload_off: 'EC472Eoff'
+    device_class: motion
+    #optmistic: False
+    qos: 1
+    #retain: False

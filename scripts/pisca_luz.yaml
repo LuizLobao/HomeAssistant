@@ -1,0 +1,40 @@
+  flash_lights:
+    alias: Flash Lights
+    sequence:
+      - service: homeassistant.turn_on
+        data:
+          entity_id:
+            - switch.escritorio_cubo
+            - switch.escritorio_abajur
+      - delay:
+          seconds: 0.7
+      - service: homeassistant.turn_off
+        data:
+          entity_id:
+            - switch.escritorio_cubo
+            - switch.escritorio_abajur
+      - service: script.turn_on
+        data:
+          entity_id: script.light_loop
+
+  light_loop:
+    alias: Light flash loop
+    sequence:
+      - delay:
+          seconds: 0.7
+      - service: script.turn_on
+        data:
+          entity_id: script.flash_lights
+          
+  light_loop_kill:
+    alias: Kill flashing lights
+    sequence:
+      service: script.turn_off
+      data:
+        entity_id: script.light_loop
+        
+        
+        
+        
+        
+        

@@ -1,0 +1,9 @@
+
+luz_escritorio:
+  - switch.escritorio_abajur
+  #- switch.escritorio_cubo
+  - switch.suiteabajur
+
+familia:
+  - device_tracker.luiz_lobao
+  - device_tracker.tatiana

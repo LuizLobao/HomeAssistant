@@ -1,0 +1,38 @@
+
+
+  ########################## QUARTO DA LUIZA ################################
+  - platform: mqtt
+    name: "Luiza LED"
+    command_topic: "cmnd/quartoluiza/POWER1"
+    state_topic: "stat/quartoluiza/POWER1"
+    availability_topic: "tele/quartoluiza/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: false
+    icon: mdi:led-on
+
+  - platform: mqtt
+    name: "Luiza 2"
+    command_topic: "cmnd/quartoluiza/POWER2"
+    state_topic: "stat/quartoluiza/POWER2"
+    availability_topic: "tele/quartoluiza/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: false
+    icon: mdi:lightbulb-on
+
+  - platform: mqtt
+    name: "Luiza 3"
+    command_topic: "cmnd/quartoluiza/POWER3"
+    state_topic: "stat/quartoluiza/POWER3"
+    availability_topic: "tele/quartoluiza/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: false
+    icon: mdi:fan

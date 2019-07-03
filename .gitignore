@@ -1,0 +1,33 @@
+
+# You can whitelist files/folders with !, these will not be ignored.
+!*.yaml
+!.gitignore
+!*.md
+*.mp3
+esphome
+zone
+tts
+
+
+# Ignore folders.
+.storage
+.cloud
+.google.token
+.node-red
+.tts
+.zone
+.esphome
+
+
+# Ensure these YAML files are ignored, otherwise your secret data/credentials will leak.
+ip_bans.yaml
+secrets.yaml
+zone.yaml
+known_devices.yaml
+home-assistant_v2.db
+home-assistant_v2.db_bkp
+core.6
+core.7
+home-assistant.log
+plex.conf
+*._*

@@ -1,0 +1,433 @@
+
+  # Ligar a luz ao por do sol se tiver alguem em casa
+  - alias: Ligar Luzes 1min antes do Por do Sol
+    initial_state: 'on'
+    hide_entity: false
+    trigger:
+      platform: sun
+      event: sunset
+      offset: -00:01:00
+    condition:
+      condition: or
+      conditions:
+      - condition: state
+        entity_id: input_boolean.casa_ocupada
+        state: 'on'
+      - condition: state
+        entity_id: input_boolean.guests  #flag pra dizer que temos visitas em casa.
+        state: 'on'
+    action:
+      service: switch.turn_on
+      entity_id: group.luz_escritorio
+
+
+
+
+  # Ligar a luz ao chegar em casa depois do por do sol
+  - alias: Ligar Luzes ao chegar em casa
+    initial_state: true
+    hide_entity: false
+    trigger:
+      platform: state
+      entity_id: input_boolean.casa_ocupada
+      from: 'off'
+      to: 'on'
+    condition:
+      condition: and
+      conditions:
+      - condition: sun
+        after: sunset
+      - condition: sun
+        before: sunrise
+    action:
+      service: switch.turn_on
+      entity_id: group.luz_escritorio
+
+
+  # Desliga as luzes quando não tiver ninguem em casa
+  - alias: Desliga Luzes - Casa Vazia
+    initial_state: true
+    hide_entity: false
+    trigger:
+      platform: state
+      entity_id: input_boolean.casa_ocupada #groups.familia
+      from: 'on' #home
+      to: 'off' #not_home
+    condition: 
+      condition: state
+      entity_id: input_boolean.guests  #flag pra dizer que temos visitas em casa.
+      state: 'off'
+    action:
+      service: switch.turn_off
+      entity_id: group.all_switches
+
+
+
+  #Liga a cafeteira as 06:00:00 se ela estiver pronta
+  - alias: Liga Cafeteira - 06h
+    initial_state: true
+    hide_entity: false
+    trigger:
+      platform: time
+      at: '06:00:00'
+    condition:
+      condition: state
+      entity_id: input_boolean.cafeteira_ok  #flag pra dizer se cafeteira está OK
+      state: 'on'
+    action:
+      - service: switch.turn_on
+        entity_id: switch.03200189ecfabc925a4a
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.cafeteira_ok
+
+
+  # Liga Cafeteira junto Alarme
+  - alias: Liga Cafeteira junto Alarme
+    trigger:
+    - platform: template
+      value_template: '{{ states.sensor.time.state == states.sensor.alarm_clock_time.state }}'
+    condition:
+    - condition: state
+      entity_id: input_boolean.cafeteira_ok
+      state: 'on'
+    action:
+      - service: switch.turn_on
+        entity_id: switch.03200189ecfabc925a4a
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.cafeteira_ok
+      - service: media_player.volume_set
+        data_template:
+          entity_id: media_player.master_bedroom
+          volume_level: 0.7
+      - service: media_player.play_media
+        data_template:
+          entity_id: media_player.master_bedroom
+          media_content_id: http://192.168.1.116:8123/local/music/birds.mp3
+          media_content_type: music
+
+  - alias: Alarme Passaros
+    initial_state: true
+    trigger:
+    - platform: template
+      value_template: '{{ states.sensor.time.state == states.sensor.alarm_clock_time.state }}'
+    action:
+      - service: media_player.volume_set
+        data_template:
+          entity_id: media_player.master_bedroom
+          volume_level: 0.7
+      - service: media_player.play_media
+        data_template:
+          entity_id: media_player.home #media_player.master_bedroom
+          media_content_id: http://192.168.1.116:8123/local/music/birds.mp3
+          media_content_type: music
+
+  # # Kettle 5 Minutes Prior
+  # - alias: Alarm 5 Min Prior
+  #   trigger:
+  #   - platform: template
+  #     value_template: '{{ states.sensor.time.state == states.sensor.alarm_clock_time_less_5.state }}'
+  #   condition:
+  #   - condition: state
+  #     entity_id: input_boolean.cafeteira_ok
+  #     state: 'on'
+  #   action:
+  #   - service: input_boolean.turn_off
+  #     data:
+  #       entity_id: input_boolean.cafeteira_ok
+
+  # # Kettle 30 Minutes Prior
+  # - alias: Alarm 30 Min Prior
+  #   trigger:
+  #   - platform: template
+  #     value_template: '{{ states.sensor.time.state == states.sensor.alarm_clock_time_less_30.state }}'
+  #   condition:
+  #   - condition: state
+  #     entity_id: input_boolean.cafeteira_ok
+  #     state: 'on'
+  #   action:
+  #   - service: input_boolean.turn_off
+  #     data:
+  #       entity_id: input_boolean.cafeteira_ok
+
+  # Pisca luzes quando a Campainha da Cozinha tocar
+  - alias: Pisca Luz com Campainha
+    initial_state: true
+    hide_entity: false
+    trigger: 
+      platform: state
+      entity_id: switch.campainha
+      from: 'off'
+      to: 'on'
+    condition:
+      condition: state
+      entity_id: input_boolean.campainha_recente
+      state: 'off'
+    action:
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.campainha_recente
+      - service: homeassistant.turn_on
+        data:
+          entity_id:
+            - switch.escritorio_cubo
+            - switch.escritorio_abajur
+      - delay:
+          seconds: 0.7
+      - service: homeassistant.turn_off
+        data:
+          entity_id:
+            - switch.escritorio_cubo
+            - switch.escritorio_abajur
+      - delay:
+          seconds: 0.7
+      - service: homeassistant.turn_on
+        data:
+          entity_id:
+            - switch.escritorio_cubo
+            - switch.escritorio_abajur
+      - delay:
+          seconds: 0.7
+      - service: homeassistant.turn_off
+        data:
+          entity_id:
+            - switch.escritorio_cubo
+            - switch.escritorio_abajur
+      - service: homeassistant.turn_on
+        data:
+          entity_id:
+            - switch.escritorio_cubo
+            - switch.escritorio_abajur
+      - delay:
+          seconds: 0.7
+      - service: homeassistant.turn_off
+        data:
+          entity_id:
+            - switch.escritorio_cubo
+            - switch.escritorio_abajur
+      - delay:
+          seconds: 0.7
+      - service: homeassistant.turn_on
+        data:
+          entity_id:
+            - switch.escritorio_cubo
+            - switch.escritorio_abajur
+      - delay:
+          seconds: 0.7
+      - service: homeassistant.turn_off
+        data:
+          entity_id:
+            - switch.escritorio_cubo
+            - switch.escritorio_abajur
+      - service: media_player.volume_set
+        data_template:
+          entity_id: media_player.office_speaker
+          volume_level: 0.8
+      - service: tts.google_say
+        entity_id: media_player.office_speaker
+        data_template:
+          message: '{{ ["A campainha está tocando.", 
+          "Parece que tem alguém na porta. A campainha acabou de tocar.", 
+          "Acho que temos visitas. A campainha está tocando",
+          "Toc. Toc. Toc. Temos alguem na porta. A campainha acabou de tocar."] | random }}'
+          language: 'pt-br'
+      - delay:
+          seconds: 30
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.campainha_recente
+
+
+
+
+
+
+
+
+  # Backup at 2AM
+  - alias: Backup Local
+    initial_state: true
+    trigger:
+    - platform: time
+      at: '02:00:00'
+    action:
+    - service: hassio.snapshot_full
+      data_template:
+        name: Backup {{ now().strftime('%Y-%m-%d') }}
+
+  # Back to Dropbox 
+  - alias: Backup Dropbox
+    initial_state: true
+    trigger:
+    - platform: time
+      at: '03:00:00'
+    action:
+    - service: hassio.addon_stdin
+      data_template:
+        addon: "7be23ff5_dropbox_sync"
+        input: {"command":"upload"}
+        
+        
+#   - alias: Reset Sensor de Movimento
+#     hide_entity: false
+#     initial_state: 'on'
+#     trigger:
+#       platform: state
+#       entity_id: binary_sensor.sensor_movimento
+#       from: 'off'
+#       to: 'on'
+#       for: 
+#         seconds: 15
+#     action:
+#       service: mqtt.publish
+#       data:
+#         topic: tele/RF_Bridge/RESULT
+#         payload: EC472Eoff
+
+#   - alias: Movimento Camera Escritorio
+#     id: movimentocameraescritorio238409284
+#     initial_state: true
+#     trigger:
+#       platform: state
+#       entity_id: binary_sensor.sensor_movimento
+#     condition:
+#       condition: and
+#       conditions:
+#       - condition: state
+#         entity_id: input_boolean.casa_ocupada ######################
+#         state: 'off'
+#       - condition: state
+#         entity_id: input_boolean.guests  #flag pra dizer que temos visitas em casa.
+#         state: 'off'
+#     action:
+#       service: notify.ios_iphone7lobao
+#       data:
+#         title: ALERTA
+#         message: Movimento no Escritorio
+#         data:
+#           attachment:
+#             content-type: jpeg
+#           push:
+#             category: camera
+#           entity_id: camera.office_cam
+
+#   - alias: Movimento Camera Cozinha
+#     id: movimentocameracozinha238409284
+#     initial_state: true
+#     trigger:
+#       platform: state
+#       entity_id: binary_sensor.sensor_cozinha
+#     condition:
+#       condition: and
+#       conditions:
+#       - condition: state
+#         entity_id: input_boolean.casa_ocupada
+#         state: 'off'
+#       - condition: state
+#         entity_id: input_boolean.guests  #flag pra dizer que temos visitas em casa.
+#         state: 'off'
+#     action:
+#       service: notify.ios_iphone7lobao
+#       data:
+#         title: ALERTA
+#         message: Movimento na Cozinha
+#         data:
+#           attachment:
+#             content-type: jpeg
+#           push:
+#             category: camera
+#           entity_id: camera.kitchen_cam
+
+#   - alias: Movimento Camera Sala
+#     id: movimentocamerasala238409284
+#     initial_state: true
+#     trigger:
+#       platform: state
+#       entity_id: binary_sensor.sensor_sala
+#     condition:
+#       condition: and
+#       conditions:
+#       - condition: state
+#         entity_id: input_boolean.casa_ocupada
+#         state: 'off'
+#       - condition: state
+#         entity_id: input_boolean.guests  #flag pra dizer que temos visitas em casa.
+#         state: 'off'
+#     action:
+#       service: notify.ios_iphone7lobao
+#       data:
+#         title: ALERTA
+#         message: Movimento na Sala
+#         data:
+#           attachment:
+#             content-type: jpeg
+#           push:
+#             category: camera
+#           entity_id: camera.livingroom_cam
+
+  - alias: notificationTTSbutton
+    id: notificationttsbutton23424234234
+    trigger:
+      platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: TTS_MESSAGE
+    action:
+    - service: tts.google_say
+      entity_id: media_player.home
+      data_template:
+        message: '{{ trigger.event.data["textInput"] }}'
+
+
+  # HA Start
+  - alias: HA Boot
+    initial_state: true
+    trigger:
+      platform: homeassistant
+      event: start
+    action:
+      - service_template: media_player.volume_set
+        data_template:
+          entity_id: media_player.office_speaker2
+          volume_level: >
+            {% if states.sun.sun.state == "above_horizon" %}
+              0.65
+            {% else %}
+              0.40
+            {% endif %}
+      - service: media_player.play_media
+        data_template:
+          entity_id: media_player.office_speaker2
+          media_content_id: http://192.168.1.116:8123/local/boot.mp3
+          media_content_type: music
+
+
+  - alias: reinicia_sensor_cam_cozinha
+    initial_state: true
+    hide_entity: false
+    trigger:
+      platform: state
+      entity_id: binary_sensor.sensor_cozinha
+      to: unavailable
+    action:
+    - service: ffmpeg.restart
+      entity_id: binary_sensor.sensor_cozinha
+
+  - alias: reinicia_sensor_cam_sala
+    initial_state: true
+    hide_entity: false
+    trigger:
+      platform: state
+      entity_id: binary_sensor.sensor_sala
+      to: unavailable
+    action:
+    - service: ffmpeg.restart
+      entity_id: binary_sensor.sensor_sala
+      
+  - alias: reinicia_sensor_cam_escritorio
+    initial_state: true
+    hide_entity: false
+    trigger:
+      platform: state
+      entity_id: binary_sensor.sensor_escritorio
+      to: unavailable
+    action:
+    - service: ffmpeg.restart
+      entity_id: binary_sensor.sensor_escritorio
