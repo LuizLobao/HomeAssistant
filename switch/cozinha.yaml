@@ -22,3 +22,13 @@
     payload_off: "OFF"
     retain: false
     icon: mdi:lightbulb-on
+
+  - platform: mqtt
+    name: "sonoff_pow"
+    command_topic: "cmnd/sonoff_pow/power"
+    state_topic: "stat/sonoff_pow/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: false
+    icon: mdi:lightbulb-on

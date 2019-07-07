@@ -1,18 +1,18 @@
-  - alias: Reset Sensor de Movimento
-    hide_entity: false
-    initial_state: 'on'
-    trigger:
-      platform: state
-      entity_id: binary_sensor.sensor_movimento
-      from: 'off'
-      to: 'on'
-      for: 
-        seconds: 15
-    action:
-      service: mqtt.publish
-      data:
-        topic: tele/RF_Bridge/RESULT
-        payload: EC472Eoff
+  # - alias: Reset Sensor de Movimento
+  #   hide_entity: false
+  #   initial_state: 'on'
+  #   trigger:
+  #     platform: state
+  #     entity_id: binary_sensor.sensor_movimento
+  #     from: 'off'
+  #     to: 'on'
+  #     for: 
+  #       seconds: 15
+  #   action:
+  #     service: mqtt.publish
+  #     data:
+  #       topic: tele/RF_Bridge/RESULT
+  #       payload: EC472Eoff
 
   - alias: Movimento Camera Escritorio
     id: movimentocameraescritorio238409284

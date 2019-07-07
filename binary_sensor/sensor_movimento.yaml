@@ -16,11 +16,12 @@
 
   - platform: mqtt
     state_topic: tele/RF_Bridge/RESULT
-    name: 'Sensor Movimento'
+    name: 'Movimento Cozinha'
     value_template: '{{value_json.RfReceived.Data}}'
     payload_on: 'EC472E'
     payload_off: 'EC472Eoff'
     device_class: motion
+    off_delay: 5
     #optmistic: False
     qos: 1
     #retain: False
