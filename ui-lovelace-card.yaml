@@ -1,9 +1,1357 @@
+cch:
+  background: 'rgba(0,0,0,.1)'
+  chevrons: true
+  options: clock
+  swipe: true
+  swipe_animate: swipe
 resources:
-  - url: /customcards/github/custom-cards/button-card.js?track=true
-    type: module
-
-- url: /community_plugin/button-card/button-card.js
-  type: module
-
-- url: /community_plugin/compact-custom-header/compact-custom-header.js
-  type: module
+  - type: js
+    url: /community_plugin/lovelace-card-mod/card-mod.js
+  - type: module
+    url: /customcards/github/custom-cards/button-card.js?track=true
+  - type: module
+    url: /customcards/github/custom-cards/tracker-card.js?track=true
+  - type: js
+    url: /local/bignumber-card.js?v=1
+  - type: module
+    url: /customcards/github/maykar/compact-custom-header.js?track=true
+  - type: module
+    url: /local/mini-media-player-bundle.js?v=1.1.3
+  - type: module
+    url: /community_plugin/mini-media-player/mini-media-player.js
+  - type: module
+    url: /community_plugin/button-card/button-card.js
+  - type: module
+    url: /community_plugin/compact-custom-header/compact-custom-header.js
+  - type: module
+    url: /community_plugin/surveillance-card/surveillance-card.js
+  - type: module
+    url: /community_plugin/mini-graph-card/mini-graph-card.js
+title: Home
+views:
+  - background: center / cover no-repeat url("/local/background.jpg") fixed
+    badges:
+      - sensor.yr_symbol
+      - device_tracker.life360_luiz_lobao
+      - device_tracker.life360_tatiana
+    cards:
+      - cards:
+          - name: Quarto Casal
+            styles:
+              card:
+                - height: 10px
+                - box-shadow: '0px 0px 3px 2px rgba(224,190,20,1)'
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/4
+            type: 'custom:button-card'
+          - cards:
+              - entity: switch.suiteteto
+                name: Teto
+                size: 30%
+                state:
+                  - styles:
+                      card:
+                        - height: 90px
+                        - box-shadow: '0px 0px 1px 1px rgba(224,190,20,1)'
+                    value: 'off'
+                  - styles:
+                      card:
+                        - height: 90px
+                        - box-shadow: '0px 0px 10px 5px rgba(224,190,20,1)'
+                    value: 'on'
+                type: 'custom:button-card'
+              - entity: switch.suiteled
+                name: Led Teto
+                size: 30%
+                state:
+                  - styles:
+                      card:
+                        - height: 90px
+                        - box-shadow: '0px 0px 1px 1px rgba(224,190,20,1)'
+                    value: 'off'
+                  - styles:
+                      card:
+                        - height: 90px
+                        - box-shadow: '0px 0px 10px 5px rgba(224,190,20,1)'
+                    value: 'on'
+                type: 'custom:button-card'
+              - entity: switch.suiteabajur
+                name: Abajur
+                size: 30%
+                state:
+                  - styles:
+                      card:
+                        - height: 90px
+                        - box-shadow: '0px 0px 1px 1px rgba(224,190,20,1)'
+                    value: 'off'
+                  - styles:
+                      card:
+                        - height: 90px
+                        - box-shadow: '0px 0px 10px 5px rgba(224,190,20,1)'
+                    value: 'on'
+                type: 'custom:button-card'
+              - entity: switch.03200189dc4f2218b511
+                name: Led Cama
+                size: 30%
+                state:
+                  - styles:
+                      card:
+                        - height: 90px
+                        - box-shadow: '0px 0px 1px 1px rgba(224,190,20,1)'
+                    value: 'off'
+                  - styles:
+                      card:
+                        - height: 90px
+                        - box-shadow: '0px 0px 10px 5px rgba(224,190,20,1)'
+                    value: 'on'
+                type: 'custom:button-card'
+            type: horizontal-stack
+          - cards:
+              - entity: binary_sensor.casal_pir
+                icon: 'mdi:motion-sensor'
+                layout: icon_name
+                name: Movimento
+                size: 100%
+                state:
+                  - styles:
+                      card:
+                        - height: 60px
+                        - box-shadow: '0px 0px 1px 1px rgba(224,190,20,1)'
+                    value: 'off'
+                  - styles:
+                      card:
+                        - height: 60px
+                        - box-shadow: '0px 0px 10px 5px rgba(224,190,20,1)'
+                    value: 'on'
+                type: 'custom:button-card'
+            type: horizontal-stack
+          - cards:
+              - entities:
+                  - sensor.casal_umidade
+                font_size: 55
+                line_color: blue
+                line_width: 5
+                name: Umid.
+                style: |
+                  ha-card {
+                    box-shadow: 0px 0px 1px 1px rgba(224,190,20,1); 
+                      }        
+                type: 'custom:mini-graph-card'
+              - color_thresholds:
+                  - color: '#00a7d1'
+                    value: 22
+                  - color: '#d35400'
+                    value: 24
+                  - color: '#c0392b'
+                    value: 26
+                entities:
+                  - sensor.casal_temperatura
+                font_size: 55
+                labels: true
+                line_width: 5
+                name: Temp.
+                show: null
+                style: |
+                  ha-card {
+                    box-shadow: 0px 0px 1px 1px rgba(224,190,20,1); 
+                      }   
+                type: 'custom:mini-graph-card'
+            type: horizontal-stack
+          - cards:
+              - artwork: cover
+                entity: media_player.master_bedroom
+                hide:
+                  power_state: false
+                  source: true
+                  volume: true
+                icon: 'mdi:google-home'
+                style: |
+                  ha-card {
+                    box-shadow: 0px 0px 1px 1px rgba(224,190,20,1); 
+                      }        
+                type: 'custom:mini-media-player'
+            type: horizontal-stack
+          - cards:
+              - entity: binary_sensor.closet_pir
+                icon: 'mdi:motion-sensor'
+                layout: icon_name
+                name: Movimento Closet
+                size: 100%
+                state:
+                  - styles:
+                      card:
+                        - height: 60px
+                        - box-shadow: '0px 0px 1px 1px rgba(224,190,20,1)'
+                    value: 'off'
+                  - styles:
+                      card:
+                        - height: 60px
+                        - box-shadow: '0px 0px 10px 5px rgba(224,190,20,1)'
+                    value: 'on'
+                type: 'custom:button-card'
+            type: horizontal-stack
+          - cards:
+              - entities:
+                  - sensor.closet_umidade
+                font_size: 55
+                line_color: blue
+                line_width: 5
+                name: Umid.
+                style: |
+                  ha-card {
+                    box-shadow: 0px 0px 1px 1px rgba(224,190,20,1); 
+                      }        
+                type: 'custom:mini-graph-card'
+              - entities:
+                  - sensor.closet_temperatura
+                font_size: 55
+                labels: true
+                line_width: 5
+                name: Temp.
+                show: null
+                style: |
+                  ha-card {
+                    box-shadow: 0px 0px 1px 1px rgba(224,190,20,1); 
+                      }
+                type: 'custom:mini-graph-card'
+            type: horizontal-stack
+        type: vertical-stack
+      - cards:
+          - name: Escritorio
+            styles:
+              card:
+                - height: 10px
+                - box-shadow: '0px 0px 3px 2px rgba(5,128,13,1)'
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/1
+            type: 'custom:button-card'
+          - cards:
+              - entity: switch.escritorio_teto
+                name: Teto
+                size: 30%
+                state:
+                  - styles:
+                      card:
+                        - height: 90px
+                        - box-shadow: '0px 0px 1px 1px rgba(5,128,13,1)'
+                    value: 'off'
+                  - styles:
+                      card:
+                        - height: 90px
+                        - box-shadow: '0px 0px 10px 5px rgba(5,128,13,1)'
+                    value: 'on'
+                type: 'custom:button-card'
+              - entity: switch.escritorio_cubo
+                name: Cubo
+                size: 30%
+                state:
+                  - styles:
+                      card:
+                        - height: 90px
+                        - box-shadow: '0px 0px 1px 1px rgba(5,128,13,1)'
+                    value: 'off'
+                  - styles:
+                      card:
+                        - height: 90px
+                        - box-shadow: '0px 0px 10px 5px rgba(5,128,13,1)'
+                    value: 'on'
+                type: 'custom:button-card'
+              - entity: switch.escritorio_abajur
+                name: Abajur
+                size: 30%
+                state:
+                  - styles:
+                      card:
+                        - height: 90px
+                        - box-shadow: '0px 0px 1px 1px rgba(5,128,13,1)'
+                    value: 'off'
+                  - styles:
+                      card:
+                        - height: 90px
+                        - box-shadow: '0px 0px 10px 5px rgba(5,128,13,1)'
+                    value: 'on'
+                type: 'custom:button-card'
+              - entity: switch.ventilador
+                name: Ventilador
+                size: 30%
+                state:
+                  - styles:
+                      card:
+                        - height: 90px
+                        - box-shadow: '0px 0px 1px 1px rgba(5,128,13,1)'
+                    value: 'off'
+                  - spin: 'on'
+                    styles:
+                      card:
+                        - height: 90px
+                        - box-shadow: '0px 0px 10px 5px rgba(5,128,13,1)'
+                    value: 'on'
+                type: 'custom:button-card'
+            type: horizontal-stack
+          - cards:
+              - entity: binary_sensor.escritorio_pir
+                icon: 'mdi:motion-sensor'
+                layout: icon_name
+                name: Movimento
+                size: 30%
+                state:
+                  - styles:
+                      card:
+                        - height: 60px
+                        - box-shadow: '0px 0px 1px 1px rgba(5,128,13,1)'
+                    value: 'off'
+                  - styles:
+                      card:
+                        - height: 60px
+                        - box-shadow: '0px 0px 10px 5px rgba(5,128,13,1)'
+                    value: 'on'
+                type: 'custom:button-card'
+            type: horizontal-stack
+          - cards:
+              - entities:
+                  - sensor.escritorio_umidade
+                style: |
+                  ha-card {
+                    box-shadow: 0px 0px 1px 1px rgba(5,128,13,1); 
+                      }    
+                font_size: 55
+                line_color: blue
+                line_width: 5
+                name: Umid.
+                type: 'custom:mini-graph-card'
+              - color_thresholds:
+                  - color: '#00a7d1'
+                    value: 22
+                  - color: '#d35400'
+                    value: 24
+                  - color: '#c0392b'
+                    value: 26
+                entities:
+                  - sensor.escritorio_temperatura
+                style: |
+                  ha-card {
+                    box-shadow: 0px 0px 1px 1px rgba(5,128,13,1); 
+                      }           
+                font_size: 55
+                labels: true
+                line_width: 5
+                name: Temp.
+                show: null
+                type: 'custom:mini-graph-card'
+            type: horizontal-stack
+          - cards:
+              - artwork: cover
+                entity: media_player.office_speaker2
+                style: |
+                  ha-card {
+                    box-shadow: 0px 0px 1px 1px rgba(5,128,13,1); 
+                      }           
+                hide:
+                  power_state: false
+                  source: true
+                  volume: true
+                icon: 'mdi:google-home'
+                type: 'custom:mini-media-player'
+            type: horizontal-stack
+        type: vertical-stack
+      - cards:
+          - name: Quarto Luiza
+            styles:
+              card:
+                - height: 10px
+                - box-shadow: '0px 0px 3px 2px rgba(219,42,235,1)'
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/5
+            type: 'custom:button-card'
+          - cards:
+              - entity: switch.luiza_led
+                name: Led
+                size: 30%
+                state:
+                  - styles:
+                      card:
+                        - height: 90px
+                        - box-shadow: '0px 0px 1px 1px rgba(219,42,235,1)'
+                    value: 'off'
+                  - styles:
+                      card:
+                        - height: 90px
+                        - box-shadow: '0px 0px 10px 5px rgba(219,42,235,1)'
+                    value: 'on'
+                type: 'custom:button-card'
+              - entity: switch.luiza_2
+                name: vazio
+                size: 30%
+                state:
+                  - styles:
+                      card:
+                        - height: 90px
+                        - box-shadow: '0px 0px 1px 1px rgba(219,42,235,1)'
+                    value: 'off'
+                  - styles:
+                      card:
+                        - height: 90px
+                        - box-shadow: '0px 0px 10px 5px rgba(219,42,235,1)'
+                    value: 'on'
+                type: 'custom:button-card'
+              - entity: switch.luiza_3
+                name: Ventilador
+                size: 30%
+                state:
+                  - styles:
+                      card:
+                        - height: 90px
+                        - box-shadow: '0px 0px 1px 1px rgba(219,42,235,1)'
+                    value: 'off'
+                  - spin: 'on'
+                    styles:
+                      card:
+                        - height: 90px
+                        - box-shadow: '0px 0px 10px 5px rgba(219,42,235,1)'
+                    value: 'on'
+                type: 'custom:button-card'
+            type: horizontal-stack
+          - cards:
+              - entity: binary_sensor.luiza_pir
+                icon: 'mdi:motion-sensor'
+                layout: icon_name
+                name: Movimento
+                size: 100%
+                state:
+                  - styles:
+                      card:
+                        - height: 60px
+                        - box-shadow: '0px 0px 1px 1px rgba(219,42,235,1)'
+                    value: 'off'
+                  - styles:
+                      card:
+                        - height: 60px
+                        - box-shadow: '0px 0px 10px 5px rgba(219,42,235,1)'
+                    value: 'on'
+                type: 'custom:button-card'
+            type: horizontal-stack
+          - cards:
+              - entities:
+                  - sensor.luiza_umidade
+                style: |
+                  ha-card {
+                    box-shadow: 0px 0px 1px 1px rgba(219,42,235,1); 
+                      }  
+                font_size: 55
+                line_color: blue
+                line_width: 5
+                name: Umid.
+                type: 'custom:mini-graph-card'
+              - color_thresholds:
+                  - color: '#00a7d1'
+                    value: 22
+                  - color: '#d35400'
+                    value: 24
+                  - color: '#c0392b'
+                    value: 26
+                entities:
+                  - sensor.luiza_temperatura
+                font_size: 55
+                style: |
+                  ha-card {
+                    box-shadow: 0px 0px 1px 1px rgba(219,42,235,1); 
+                      }  
+                labels: true
+                line_width: 5
+                name: Temp.
+                show: null
+                type: 'custom:mini-graph-card'
+            type: horizontal-stack
+          - cards:
+              - artwork: cover
+                style: |
+                  ha-card {
+                    box-shadow: 0px 0px 1px 1px rgba(219,42,235,1); 
+                      }   
+                entity: media_player.luizas_room_speaker
+                hide:
+                  power_state: false
+                  source: true
+                  volume: true
+                icon: 'mdi:google-home'
+                type: 'custom:mini-media-player'
+            type: horizontal-stack
+        type: vertical-stack
+      - cards:
+          - name: Sala
+            styles:
+              card:
+                - height: 10px
+                - box-shadow: '0px 0px 3px 2px rgba(42,109,214,.9)'
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/3
+            type: 'custom:button-card'
+          - cards:
+              - entity: null
+                name: vazio
+                size: 30%
+                styles:
+                  card:
+                    - height: 90px
+                    - box-shadow: '0px 0px 1px 1px rgba(42,109,214,.9)'
+                type: 'custom:button-card'
+              - entity: null
+                name: vazio
+                size: 30%
+                styles:
+                  card:
+                    - height: 90px
+                    - box-shadow: '0px 0px 1px 1px rgba(42,109,214,.9)'
+                type: 'custom:button-card'
+              - entity: null
+                name: vazio
+                size: 30%
+                styles:
+                  card:
+                    - height: 90px
+                    - box-shadow: '0px 0px 1px 1px rgba(42,109,214,.9)'
+                type: 'custom:button-card'
+            type: horizontal-stack
+          - cards:
+              - entity: binary_sensor.sala_pir
+                icon: 'mdi:motion-sensor'
+                layout: icon_name
+                name: Movimento
+                size: 100%
+                state:
+                  - styles:
+                      card:
+                        - height: 60px
+                        - box-shadow: '0px 0px 1px 1px rgba(42,109,214,.9)'
+                    value: 'off'
+                  - styles:
+                      card:
+                        - height: 60px
+                        - box-shadow: '0px 0px 10px 5px rgba(42,109,214,.9)'
+                    value: 'on'
+                type: 'custom:button-card'
+            type: horizontal-stack
+          - cards:
+              - entities:
+                  - sensor.sala_umidade
+                style: |
+                  ha-card {
+                    box-shadow: 0px 0px 1px 1px rgba(42,109,214,.9); 
+                      }  
+                font_size: 55
+                line_color: blue
+                line_width: 5
+                name: Umid.
+                type: 'custom:mini-graph-card'
+              - color_thresholds:
+                  - color: '#00a7d1'
+                    value: 22
+                  - color: '#d35400'
+                    value: 24
+                  - color: '#c0392b'
+                    value: 26
+                entities:
+                  - sensor.sala_temperatura
+                style: |
+                  ha-card {
+                    box-shadow: 0px 0px 1px 1px rgba(42,109,214,.9); 
+                      }  
+                font_size: 55
+                labels: true
+                line_width: 5
+                name: Temp.
+                show: null
+                type: 'custom:mini-graph-card'
+            type: horizontal-stack
+          - cards:
+              - artwork: cover
+                entity: media_player.living_room
+                style: |
+                  ha-card {
+                    box-shadow: 0px 0px 1px 1px rgba(42,109,214,.9); 
+                      }  
+                hide:
+                  power_state: false
+                  source: true
+                  volume: true
+                icon: 'mdi:google-home'
+                styles:
+                  card:
+                    - height: 90px
+                    - box-shadow: '0px 0px 1px 1px rgba(42,109,214,.9)'
+                type: 'custom:mini-media-player'
+            type: horizontal-stack
+          - cards:
+              - entity: binary_sensor.porta_varanda
+                size: 30%
+                icon: 'mdi:door-open'
+                styles:
+                  card:
+                    - height: 90px
+                    - box-shadow: '0px 0px 1px 1px rgba(42,109,214,.9)'
+                type: 'custom:button-card'
+            type: horizontal-stack
+        type: vertical-stack
+      - entity: sensor.time
+        styles:
+          height: 170px
+        type: 'custom:bignumber-card'
+      - entity: media_player.home
+        hide:
+          icon: false
+          power: true
+          source: true
+        icon: 'mdi:google-home'
+        speaker_group:
+          entities:
+            - entity_id: media_player.master_bedroom
+              name: Suite
+            - entity_id: media_player.office_speaker2
+              name: Escritorio
+            - entity_id: media_player.luiza_speaker
+              name: Luiza
+            - entity_id: media_player.kitchen_speaker
+              name: cozinha
+            - entity_id: media_player.living_room
+              name: Sala
+          platform: google
+          show_group_count: true
+        type: 'custom:mini-media-player'
+      - entities:
+          - entity: input_boolean.guests
+          - entity: input_boolean.feriado
+          - entity: input_boolean.casa_ocupada
+        show_header_toggle: false
+        theme: default
+        title: Flags
+        type: entities
+      - entity: weather.dark_sky
+        type: weather-forecast
+      - entities:
+          - entity: binary_sensor.movimento_cozinha
+        type: entities
+    icon: 'mdi:home'
+    main_config: true
+    panel: false
+    path: default_view
+    theme: transparent
+    title: Home
+    type: 'custom:compact-custom-header'
+  - background: center / cover no-repeat url("/local/background.jpg") fixed
+    badges: []
+    cards:
+      - cards:
+          - name: Escritorio
+            styles:
+              card:
+                - height: 10px
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/1
+            type: 'custom:button-card'
+          - cards:
+              - entity: switch.escritorio_teto
+                name: Teto
+                size: 30%
+                styles:
+                  card:
+                    - height: 90px
+                type: 'custom:button-card'
+              - entity: switch.escritorio_cubo
+                name: Cubo
+                size: 30%
+                styles:
+                  card:
+                    - height: 90px
+                type: 'custom:button-card'
+              - entity: switch.escritorio_abajur
+                name: Abajur
+                size: 30%
+                styles:
+                  card:
+                    - height: 90px
+                type: 'custom:button-card'
+              - entity: switch.ventilador
+                name: Ventilador
+                size: 30%
+                state:
+                  - spin: false
+                    value: 'off'
+                  - spin: true
+                    value: 'on'
+                styles:
+                  card:
+                    - height: 90px
+                type: 'custom:button-card'
+            type: horizontal-stack
+          - cards:
+              - entity: media_player.office_speaker2
+                name: ' '
+                size: 30%
+                styles:
+                  card:
+                    - height: 70px
+                type: 'custom:button-card'
+            type: horizontal-stack
+          - cards:
+              - artwork: cover
+                entity: media_player.office_speaker2
+                hide:
+                  power_state: false
+                  source: true
+                  volume: true
+                icon: 'mdi:google-home'
+                shortcuts:
+                  buttons:
+                    - icon: 'mdi:cat'
+                      id: >-
+                        spotify:user:luizalfredolobao:playlist:37i9dQZF1DWSqmBTGDYngZ
+                      type: playlist
+                    - icon: 'mdi:dog'
+                      id: >-
+                        spotify:user:luizalfredolobao:playlist:37i9dQZF1DX1spT6G94GFC
+                      type: playlist
+                  columns: 4
+                type: 'custom:mini-media-player'
+            type: horizontal-stack
+        type: vertical-stack
+      - entities:
+          - entity: sensor.escritorio_temperatura
+          - entity: sensor.escritorio_umidade
+          - entity: binary_sensor.escritorio_pir
+        show_header_toggle: false
+        title: MultiSensor Escritório
+        type: entities
+      - entity: light.53486013807d3a374c09
+        name: Lampada Teste
+        type: light
+      - entities:
+          - device_tracker.life360_luiz_lobao
+        title: Lobão
+        type: history-graph
+      - entities:
+          - sensor.escritorio_temperatura
+        title: Temp. Escritório
+        type: history-graph
+    icon: 'mdi:desktop-classic'
+    main_config: true
+    title: Escritorio
+    type: 'custom:compact-custom-header'
+  - background: center / cover no-repeat url("/local/background.jpg") fixed
+    badges: []
+    cards:
+      - cards:
+          - entity: switch.sonoff_100035a097_1
+            hold_action:
+              action: more-info
+            icon: 'mdi:lightbulb-on'
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: switch.sonoff_100035a097_2
+            hold_action:
+              action: more-info
+            icon: 'mdi:lightbulb-on'
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: switch.sonoff_100035a097_3
+            hold_action:
+              action: more-info
+            icon: 'mdi:lightbulb-on'
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: switch.03200189ecfabc925a4a
+            hold_action:
+              action: more-info
+            icon: 'mdi:coffee-outline'
+            name: Cafeteira
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+        type: horizontal-stack
+      - entities:
+          - entity: input_boolean.cafeteira_ok
+          - entity: binary_sensor.porta_cozinha
+          - entity: binary_sensor.movimento_cozinha
+        type: entities
+      - card:
+          card:
+            title: Luzes Ligadas
+            type: entities
+          entities:
+            - switch.escritorio_teto
+            - switch.escritorio_cubo
+            - switch.escritorio_abajur
+            - switch.ventilador
+            - switch.suiteabajur
+            - switch.suiteled
+            - switch.suiteteto
+            - switch.closet
+            - switch.luiza_led
+            - switch.luiza_2
+            - switch.luiza_3
+            - switch.sonoff_100035a097_1
+            - switch.sonoff_100035a097_2
+            - switch.sonoff_100035a097_3
+            - switch.03200189ecfabc925a4a
+            - switch.03200189dc4f2218b511
+          state_filter:
+            - 'on'
+          type: entity-filter
+        conditions:
+          - entity: group.all_switches
+            state: 'on'
+        type: conditional
+      - aspect_ratio: 100%
+        type: iframe
+        url: >-
+          https://embed.windy.com/embed2.html?lat=-23.039&lon=-43.215&zoom=8&level=surface&overlay=radar&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&detailLat=-22.951&detailLon=-44.566&metricWind=kt&metricTemp=%C2%B0C&radarRange=-1
+      - entity: weather.dark_sky
+        type: weather-forecast
+      - entities:
+          - entity: sensor.tempo_ate_consutorio
+          - entity: sensor.tempo_ate_oi
+        show_header_toggle: false
+        title: Transito
+        type: entities
+      - entities:
+          - sensor.tempo_ate_oi
+          - sensor.tempo_ate_consutorio
+        title: Tempo Deslocamento
+        type: history-graph
+      - entity: media_player.kitchen_speaker
+        type: media-control
+      - entities:
+          - entity: switch.sonoff_pow
+          - entity: sensor.pow_voltage
+          - entity: sensor.pow_power
+          - entity: sensor.pow_current
+        show_header_toggle: false
+        title: Maquina de Lavar
+        type: entities
+    icon: 'mdi:silverware'
+    main_config: true
+    title: Cozinha
+    type: 'custom:compact-custom-header'
+  - background: center / cover no-repeat url("/local/background.jpg") fixed
+    badges: []
+    cards:
+      - entity: media_player.living_room
+        type: media-control
+      - entities:
+          - entity: binary_sensor.porta_sala
+          - entity: binary_sensor.porta_varanda
+          - entity: binary_sensor.sala_pir
+          - entity: sensor.sala_temperatura
+          - entity: sensor.sala_umidade
+        type: entities
+    icon: 'mdi:sofa'
+    main_config: true
+    title: Sala
+    type: 'custom:compact-custom-header'
+  - background: center / cover no-repeat url("/local/background.jpg") fixed
+    badges:
+      - sensor.alarm_clock_time
+    cards:
+      - cards:
+          - entity: switch.suiteteto
+            hold_action:
+              action: more-info
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: switch.suiteled
+            hold_action:
+              action: more-info
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: switch.suiteabajur
+            hold_action:
+              action: more-info
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: switch.03200189dc4f2218b511
+            hold_action:
+              action: more-info
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+        type: horizontal-stack
+      - entity: weather.dark_sky
+        type: weather-forecast
+      - entity: media_player.master_bedroom
+        type: media-control
+      - entities:
+          - entity: input_number.alarm_clock_hour
+          - entity: input_number.alarm_clock_minute
+          - entity: automation.alarme_passaros
+        show_header_toggle: false
+        title: Alarme
+        type: entities
+      - cards:
+          - name: Controle Remoto
+            styles:
+              card:
+                - height: 10px
+            type: 'custom:button-card'
+          - cards:
+              - entity: null
+                name: 1
+                size: 100%
+                styles:
+                  card:
+                    - height: 50px
+                type: 'custom:button-card'
+              - entity: null
+                name: 2
+                size: 100%
+                styles:
+                  card:
+                    - height: 50px
+                type: 'custom:button-card'
+              - entity: null
+                name: 3
+                size: 100%
+                styles:
+                  card:
+                    - height: 50px
+                type: 'custom:button-card'
+              - entity: null
+                icon: 'mdi:chevron-up'
+                name: ''
+                size: 100%
+                styles:
+                  card:
+                    - height: 50px
+                type: 'custom:button-card'
+            type: horizontal-stack
+          - cards:
+              - entity: null
+                name: 4
+                size: 100%
+                styles:
+                  card:
+                    - height: 50px
+                type: 'custom:button-card'
+              - entity: null
+                name: 5
+                size: 100%
+                styles:
+                  card:
+                    - height: 50px
+                type: 'custom:button-card'
+              - entity: null
+                name: 6
+                size: 100%
+                styles:
+                  card:
+                    - height: 50px
+                type: 'custom:button-card'
+              - entity: null
+                icon: 'mdi:chevron-down'
+                name: ''
+                size: 100%
+                styles:
+                  card:
+                    - height: 50px
+                type: 'custom:button-card'
+            type: horizontal-stack
+          - cards:
+              - entity: null
+                name: 7
+                size: 100%
+                styles:
+                  card:
+                    - height: 50px
+                type: 'custom:button-card'
+              - entity: null
+                name: 8
+                size: 100%
+                styles:
+                  card:
+                    - height: 50px
+                type: 'custom:button-card'
+              - entity: null
+                name: 9
+                size: 100%
+                styles:
+                  card:
+                    - height: 50px
+                type: 'custom:button-card'
+              - entity: null
+                icon: 'mdi:volume-plus'
+                name: ''
+                show_icon: true
+                size: 100%
+                styles:
+                  card:
+                    - height: 50px
+                type: 'custom:button-card'
+            type: horizontal-stack
+          - cards:
+              - entity: null
+                name: null
+                size: 100%
+                styles:
+                  card:
+                    - height: 25px
+                type: 'custom:button-card'
+              - entity: null
+                name: '0'
+                size: 100%
+                styles:
+                  card:
+                    - height: 50px
+                type: 'custom:button-card'
+              - entity: null
+                name: null
+                size: 100%
+                styles:
+                  card:
+                    - height: 25px
+                type: 'custom:button-card'
+              - entity: null
+                icon: 'mdi:volume-minus'
+                name: ''
+                size: 100%
+                styles:
+                  card:
+                    - height: 50px
+                type: 'custom:button-card'
+            type: horizontal-stack
+          - cards:
+              - entity: null
+                name: Canais
+                styles:
+                  card:
+                    - height: 15px
+                type: 'custom:button-card'
+            type: horizontal-stack
+          - cards:
+              - entity: null
+                name: Canal 1
+                styles:
+                  card:
+                    - height: 25px
+                type: 'custom:button-card'
+              - entity: null
+                name: Canal 2
+                styles:
+                  card:
+                    - height: 25px
+                type: 'custom:button-card'
+              - entity: null
+                name: Canal 3
+                styles:
+                  card:
+                    - height: 25px
+                type: 'custom:button-card'
+              - entity: null
+                name: Canal 4
+                styles:
+                  card:
+                    - height: 25px
+                type: 'custom:button-card'
+            type: horizontal-stack
+          - cards:
+              - entity: null
+                name: Canal 5
+                styles:
+                  card:
+                    - height: 25px
+                type: 'custom:button-card'
+              - entity: null
+                name: Canal 6
+                styles:
+                  card:
+                    - height: 25px
+                type: 'custom:button-card'
+              - entity: null
+                name: Canal 7
+                styles:
+                  card:
+                    - height: 25px
+                type: 'custom:button-card'
+              - entity: null
+                name: Canal 8
+                styles:
+                  card:
+                    - height: 25px
+                type: 'custom:button-card'
+            type: horizontal-stack
+          - cards:
+              - entity: null
+                name: Canal 9
+                styles:
+                  card:
+                    - height: 25px
+                type: 'custom:button-card'
+              - entity: null
+                name: Canal 10
+                styles:
+                  card:
+                    - height: 25px
+                type: 'custom:button-card'
+              - entity: null
+                name: Canal 11
+                styles:
+                  card:
+                    - height: 25px
+                type: 'custom:button-card'
+              - entity: null
+                name: Canal 12
+                styles:
+                  card:
+                    - height: 25px
+                type: 'custom:button-card'
+            type: horizontal-stack
+        type: vertical-stack
+      - entities:
+          - entity: sensor.casal_temperatura
+          - entity: sensor.casal_umidade
+          - entity: binary_sensor.casal_pir
+        type: entities
+      - entities:
+          - entity: sensor.closet_temperatura
+          - entity: sensor.closet_umidade
+          - entity: binary_sensor.closet_pir
+          - entity: switch.closet
+        show_header_toggle: false
+        title: Closet
+        type: entities
+      - entities:
+          - sensor.closet_temperatura
+          - sensor.casal_temperatura
+        type: history-graph
+    icon: 'mdi:human-male-female'
+    main_config: true
+    title: Suite
+    type: 'custom:compact-custom-header'
+  - background: center / cover no-repeat url("/local/background.jpg") fixed
+    badges: []
+    cards:
+      - entity: media_player.luizas_room_speaker
+        type: media-control
+      - cards:
+          - entity: switch.luiza_led
+            hold_action:
+              action: more-info
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: switch.luiza_2
+            hold_action:
+              action: more-info
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: switch.luiza_3
+            hold_action:
+              action: more-info
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+        type: horizontal-stack
+      - entities:
+          - entity: sensor.luiza_temperatura
+          - entity: sensor.luiza_umidade
+          - entity: binary_sensor.luiza_pir
+        show_header_toggle: false
+        title: Multi Sensor Luiza
+        type: entities
+    icon: 'mdi:human-female'
+    main_config: true
+    title: Luiza
+    type: 'custom:compact-custom-header'
+  - background: center / cover no-repeat url("/local/background.jpg") fixed
+    badges: []
+    cards:
+      - entities:
+          - entity: automation.notificationttsbutton
+          - entity: automation.pisca_luz_com_campainha
+          - entity: automation.ligar_luzes_ao_chegar_em_casa
+        show_header_toggle: false
+        title: Automações de Teste
+        type: entities
+      - entity: sensor.time_date
+        type: sensor
+      - entities:
+          - entity: device_tracker.life360_luiz_lobao
+          - entity: device_tracker.life360_tatiana
+          - entity: input_boolean.guests
+          - entity: group.familia
+        show_header_toggle: false
+        title: Em Casa
+        type: entities
+      - entities:
+          - entity: automation.desliga_luzes_casa_vazia
+          - entity: automation.ligar_luzes_1min_antes_do_por_do_sol
+          - entity: input_boolean.auto_abajur_escritorio
+        show_header_toggle: false
+        title: Automações Luz Geral
+        type: entities
+      - entities:
+          - entity: input_boolean.feriado
+        show_header_toggle: false
+        title: Automações Luiza
+        type: entities
+      - entities:
+          - entity: input_boolean.cafeteira_ok
+          - entity: automation.liga_cafeteira_06h
+          - entity: automation.liga_cafeteira_junto_alarme
+          - entity: input_boolean.campainha_recente
+          - entity: input_boolean.auto_aviso_porta_aberta
+        show_header_toggle: false
+        title: Automações Cozinha
+        type: entities
+      - entities:
+          - entity: automation.backup_local
+          - entity: automation.backup_dropbox
+        show_header_toggle: false
+        title: Automações de Backup
+        type: entities
+      - entity: sensor.speedtest_download
+        max: 200
+        min: 0
+        severity:
+          green: 150
+          red: 0
+          yellow: 100
+        theme: transparent
+        type: gauge
+      - entities:
+          - entity: automation.movimento_camera_cozinha
+          - entity: automation.movimento_camera_escritorio
+          - entity: automation.movimento_camera_sala
+        title: Segurança
+        type: entities
+      - entities:
+          - sensor.speedtest_download
+          - sensor.speedtest_upload
+        title: Velocidade Banda Larga
+        type: history-graph
+      - entities:
+          - entity: sensor.closet_temperatura
+          - entity: sensor.escritorio_temperatura
+          - entity: sensor.luiza_temperatura
+          - entity: sensor.casal_temperatura
+          - entity: binary_sensor.movimento_cozinha
+          - entity: binary_sensor.closet_pir
+          - entity: binary_sensor.escritorio_pir
+          - entity: binary_sensor.luiza_pir
+          - entity: binary_sensor.casal_pir
+          - entity: sensor.closet_umidade
+          - entity: sensor.escritorio_umidade
+          - entity: sensor.luiza_umidade
+          - entity: sensor.casal_umidade
+        title: Temperaturas
+        type: entities
+    icon: 'mdi:home-assistant'
+    main_config: true
+    title: Home Assitant
+    type: 'custom:compact-custom-header'
+  - background: center / cover no-repeat url("/local/background.jpg") fixed
+    badges: []
+    cards:
+      - camera_image: camera.kitchen_cam
+        camera_view: live
+        entities:
+          - binary_sensor.sensor_cozinha
+          - media_player.kitchen_speaker
+        title: Cozinha
+        type: picture-glance
+      - entities:
+          - entity: script.flash_lights
+          - entity: script.light_loop
+          - entity: script.light_loop_kill
+        title: Scripts
+        type: entities
+      - camera_image: camera.livingroom_cam
+        camera_view: live
+        entities:
+          - binary_sensor.sensor_sala
+          - media_player.living_room
+        title: Sala
+        type: picture-glance
+      - entities:
+          - entity: device_tracker.life360_tatiana
+          - entity: device_tracker.life360_luiz_lobao
+        title: Onde Estamos
+        type: map
+      - camera_image: camera.office_cam
+        camera_view: live
+        entities:
+          - switch.escritorio_teto
+          - switch.escritorio_cubo
+          - switch.escritorio_abajur
+          - binary_sensor.sensor_escritorio
+          - media_player.office_speaker2
+        title: Escritorio
+        type: picture-glance
+      - entities:
+          - entity: input_boolean.casa_ocupada
+          - entity: input_boolean.guests
+          - entity: device_tracker.life360_luiz_lobao
+          - entity: device_tracker.life360_tatiana
+        show_header_toggle: false
+        title: Casa Ocupada ?
+        type: entities
+      - entities:
+          - entity: binary_sensor.sala_pir
+          - entity: binary_sensor.escritorio_pir
+          - entity: binary_sensor.luiza_pir
+          - entity: binary_sensor.casal_pir
+          - entity: binary_sensor.closet_pir
+          - entity: binary_sensor.movimento_cozinha
+        show_header_toggle: false
+        title: Movimentos
+        type: entities
+    icon: 'mdi:shield-home'
+    main_config: true
+    title: Segurança
+    type: 'custom:compact-custom-header'
+  - badges: []
+    cards:
+      - cameras:
+          - entity: camera.livingroom_cam
+            motion_entity: binary_sensor.sala_pir
+          - entity: camera.office_cam
+            motion_entity: binary_sensor.escritorio_pir
+          - entity: camera.kitchen_cam
+            motion_entity: binary_sensor.sensor_cozinha
+        thumb_interval: 15
+        type: 'custom:surveillance-card'
+        update_interval: 2
+    icon: 'mdi:cctv'
+    panel: true
+    title: Surveillance

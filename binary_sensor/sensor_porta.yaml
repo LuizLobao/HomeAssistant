@@ -19,3 +19,14 @@
     #optmistic: False
     qos: 1
     #retain: False
+
+  - platform: mqtt
+    state_topic: tele/RF_Bridge/RESULT
+    name: 'Porta Varanda'
+    value_template: '{{value_json.RfReceived.Data}}'
+    payload_on: '30F80A'
+    payload_off: '30F80E'
+    device_class: door
+    #optmistic: False
+    qos: 1
+    #retain: False
