@@ -2,7 +2,7 @@
  "nodes": {
   "node-red": {
    "name": "node-red",
-   "version": "0.20.6",
+   "version": "0.20.7",
    "local": false,
    "nodes": {
     "inject": {
@@ -400,7 +400,7 @@
   },
   "node-red-contrib-bigtimer": {
    "name": "node-red-contrib-bigtimer",
-   "version": "2.2.0",
+   "version": "2.2.3",
    "local": false,
    "nodes": {
     "bigtimer": {
@@ -417,7 +417,7 @@
   },
   "node-red-contrib-cast": {
    "name": "node-red-contrib-cast",
-   "version": "0.2.6",
+   "version": "0.2.8",
    "local": false,
    "nodes": {
     "cast-to-client": {
@@ -451,7 +451,7 @@
   },
   "node-red-contrib-home-assistant-websocket": {
    "name": "node-red-contrib-home-assistant-websocket",
-   "version": "0.12.3",
+   "version": "0.13.1",
    "local": false,
    "nodes": {
     "server": {
@@ -1188,7 +1188,7 @@
   },
   "node-red-dashboard": {
    "name": "node-red-dashboard",
-   "version": "2.15.4",
+   "version": "2.15.5",
    "local": false,
    "nodes": {
     "ui_base": {
@@ -1512,7 +1512,7 @@
    },
    "menu-deploymenu-item-flow": true,
    "menu-deploymenu-item-full": false,
-   "menu-menu-item-sidebar": false
+   "menu-menu-item-sidebar": true
   }
  }
 }

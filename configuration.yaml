@@ -58,7 +58,7 @@ input_boolean: !include_dir_merge_named input_boolean/ #!include input_boolean.y
 input_number: !include_dir_merge_named input_number/ #!include input_number.yaml
 binary_sensor: !include_dir_merge_list binary_sensor/  #!include binary_sensor.yaml
 camera: !include_dir_merge_list camera/ #!include camera.yaml
-
+alarm_control_panel: !include_dir_merge_list alarm/
 
 
 weather:
