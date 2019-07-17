@@ -1,7 +1,7 @@
   
   - platform: manual
     name: Home Alarm
-    code: 1234
+    code: !secret senha_alarme
     pending_time: 30     #tempo para sair de casa antes do alarme ficar ativo
     delay_time: 20       #tempo para desarmar o alarme antes de ativar
     trigger_time: 4      #The time in seconds of the trigger time in which the alarm is firing.
