@@ -1,6 +1,7 @@
 cch:
   background: 'rgba(0,0,0,.1)'
   chevrons: true
+  clock_date: true
   options: clock
   swipe: true
   swipe_animate: swipe
@@ -27,14 +28,57 @@ resources:
     url: /community_plugin/surveillance-card/surveillance-card.js
   - type: module
     url: /community_plugin/mini-graph-card/mini-graph-card.js
+  - type: js
+    url: /customcards/github/thomasloven/popup-card.js?track=true
 title: Home
 views:
   - background: center / cover no-repeat url("/local/background.jpg") fixed
-    badges:
-      - sensor.yr_symbol
-      - device_tracker.life360_luiz_lobao
-      - device_tracker.life360_tatiana
+    badges: []
     cards:
+      - cards:
+          - entity: device_tracker.life360_luiz_lobao
+            name: Alfredo
+            show_name: false
+            state_image:
+              Colegio: /local/alfredo2_off.png
+              Consultorio: /local/alfredo2_off.png
+              DeckBalsa: /local/alfredo2_off.png
+              EcoLounge: /local/alfredo2_off.png
+              Itanhanga: /local/alfredo2_off.png
+              Oi Leblon: /local/alfredo2_off.png
+              Praia: /local/alfredo2_off.png
+              home: /local/alfredo2_on.png
+              not_home: /local/alfredo2_off.png
+            type: picture-entity
+          - entity: device_tracker.life360_tatiana
+            name: Tatiana
+            show_name: false
+            state_image:
+              Colegio: /local/tatiana2_off.png
+              Consultorio: /local/tatiana2_off.png
+              DeckBalsa: /local/tatiana2_off.png
+              EcoLounge: /local/tatiana2_off.png
+              Itanhanga: /local/tatiana2_off.png
+              Oi Leblon: /local/tatiana2_off.png
+              Praia: /local/tatiana2_off.png
+              home: /local/tatiana2_on.png
+              not_home: /local/tatiana2_off.png
+            type: picture-entity
+          - entity: device_tracker.life360_tatiana
+            name: Luiza
+            show_name: false
+            state_image:
+              Colegio: /local/luiza_off.png
+              Consultorio: /local/luiza_off.png
+              DeckBalsa: /local/luiza_off.png
+              EcoLounge: /local/luiza_off.png
+              Itanhanga: /local/luiza_off.png
+              Oi Leblon: /local/luiza_off.png
+              Praia: /local/luiza_off.png
+              home: /local/luiza_on.png
+              not_home: /local/luiza_off.png
+            type: picture-entity
+        type: horizontal-stack
       - cards:
           - name: Quarto Casal
             styles:
@@ -112,7 +156,7 @@ views:
                 icon: 'mdi:motion-sensor'
                 layout: icon_name
                 name: Movimento
-                size: 100%
+                size: 30%
                 state:
                   - styles:
                       card:
@@ -124,6 +168,10 @@ views:
                         - height: 60px
                         - box-shadow: '0px 0px 10px 5px rgba(224,190,20,1)'
                     value: 'on'
+                style: |
+                  ha-card {
+                    box-shadow: 0px 0px 1px 1px rgba(224,190,20,1); 
+                      } 
                 type: 'custom:button-card'
             type: horizontal-stack
           - cards:
@@ -217,6 +265,9 @@ views:
                 type: 'custom:mini-graph-card'
             type: horizontal-stack
         type: vertical-stack
+      - entity: sensor.time
+        scale: 63px
+        type: 'custom:bignumber-card'
       - cards:
           - name: Escritorio
             styles:
@@ -312,14 +363,14 @@ views:
           - cards:
               - entities:
                   - sensor.escritorio_umidade
-                style: |
-                  ha-card {
-                    box-shadow: 0px 0px 1px 1px rgba(5,128,13,1); 
-                      }    
                 font_size: 55
                 line_color: blue
                 line_width: 5
                 name: Umid.
+                style: |
+                  ha-card {
+                    box-shadow: 0px 0px 1px 1px rgba(5,128,13,1); 
+                      }    
                 type: 'custom:mini-graph-card'
               - color_thresholds:
                   - color: '#00a7d1'
@@ -330,32 +381,74 @@ views:
                     value: 26
                 entities:
                   - sensor.escritorio_temperatura
-                style: |
-                  ha-card {
-                    box-shadow: 0px 0px 1px 1px rgba(5,128,13,1); 
-                      }           
                 font_size: 55
                 labels: true
                 line_width: 5
                 name: Temp.
                 show: null
+                style: |
+                  ha-card {
+                    box-shadow: 0px 0px 1px 1px rgba(5,128,13,1); 
+                      }           
                 type: 'custom:mini-graph-card'
             type: horizontal-stack
           - cards:
               - artwork: cover
                 entity: media_player.office_speaker2
-                style: |
-                  ha-card {
-                    box-shadow: 0px 0px 1px 1px rgba(5,128,13,1); 
-                      }           
                 hide:
                   power_state: false
                   source: true
                   volume: true
                 icon: 'mdi:google-home'
+                style: |
+                  ha-card {
+                    box-shadow: 0px 0px 1px 1px rgba(5,128,13,1); 
+                      }           
                 type: 'custom:mini-media-player'
             type: horizontal-stack
         type: vertical-stack
+      - action: navigate
+        tap_action:
+          action: navigate
+          navigation_path: /lovelace/7/
+        entity: alarm_control_panel.home_alarm
+        name: Alarme
+        state:
+          - action: navigate
+            color: red
+            icon: 'mdi:alert'
+            name: Alarme Acionado
+            styles:
+              card:
+                - animation: blink 1s ease infinite
+            value: triggered
+          - action: navigate
+            color: red
+            icon: 'mdi:shield-check'
+            name: Alarme Ativado - Home
+            value: armed_home
+          - action: navigate
+            color: red
+            icon: 'mdi:shield-check'
+            name: Alarme Ativado - Away
+            value: armed_away
+          - action: navigate
+            color: yellow
+            icon: 'mdi:shield-check'
+            name: Alarme Pendente
+            styles:
+              card:
+                - animation: blink 2s ease infinite
+            value: pending
+          - action: navigate
+            color: green
+            icon: 'mdi:shield-check'
+            name: Alarme Desativado
+            value: disarmed
+        styles:
+          card:
+            - height: 158px
+        type: 'custom:button-card'
       - cards:
           - name: Quarto Luiza
             styles:
@@ -436,14 +529,14 @@ views:
           - cards:
               - entities:
                   - sensor.luiza_umidade
-                style: |
-                  ha-card {
-                    box-shadow: 0px 0px 1px 1px rgba(219,42,235,1); 
-                      }  
                 font_size: 55
                 line_color: blue
                 line_width: 5
                 name: Umid.
+                style: |
+                  ha-card {
+                    box-shadow: 0px 0px 1px 1px rgba(219,42,235,1); 
+                      }  
                 type: 'custom:mini-graph-card'
               - color_thresholds:
                   - color: '#00a7d1'
@@ -455,29 +548,72 @@ views:
                 entities:
                   - sensor.luiza_temperatura
                 font_size: 55
-                style: |
-                  ha-card {
-                    box-shadow: 0px 0px 1px 1px rgba(219,42,235,1); 
-                      }  
                 labels: true
                 line_width: 5
                 name: Temp.
                 show: null
+                style: |
+                  ha-card {
+                    box-shadow: 0px 0px 1px 1px rgba(219,42,235,1); 
+                      }  
                 type: 'custom:mini-graph-card'
             type: horizontal-stack
           - cards:
               - artwork: cover
-                style: |
-                  ha-card {
-                    box-shadow: 0px 0px 1px 1px rgba(219,42,235,1); 
-                      }   
                 entity: media_player.luizas_room_speaker
                 hide:
                   power_state: false
                   source: true
                   volume: true
                 icon: 'mdi:google-home'
+                style: |
+                  ha-card {
+                    box-shadow: 0px 0px 1px 1px rgba(219,42,235,1); 
+                      }   
                 type: 'custom:mini-media-player'
+            type: horizontal-stack
+        type: vertical-stack
+      - cards:
+          - cards:
+              - entity: input_boolean.guests
+                name: Visitas ?
+                size: 30%
+                styles:
+                  card:
+                    - height: 75px
+                type: 'custom:button-card'
+              - entity: input_boolean.feriado
+                size: 30%
+                styles:
+                  card:
+                    - height: 75px
+                type: 'custom:button-card'
+              - entity: input_boolean.casa_ocupada
+                size: 30%
+                styles:
+                  card:
+                    - height: 75px
+                type: 'custom:button-card'
+            type: horizontal-stack
+          - cards:
+              - entity: null
+                size: 30%
+                styles:
+                  card:
+                    - height: 75px
+                type: 'custom:button-card'
+              - entity: input_boolean.cafeteira_ok
+                size: 30%
+                styles:
+                  card:
+                    - height: 75px
+                type: 'custom:button-card'
+              - entity: input_boolean.auto_aviso_porta_aberta
+                size: 30%
+                styles:
+                  card:
+                    - height: 75px
+                type: 'custom:button-card'
             type: horizontal-stack
         type: vertical-stack
       - cards:
@@ -538,14 +674,14 @@ views:
           - cards:
               - entities:
                   - sensor.sala_umidade
-                style: |
-                  ha-card {
-                    box-shadow: 0px 0px 1px 1px rgba(42,109,214,.9); 
-                      }  
                 font_size: 55
                 line_color: blue
                 line_width: 5
                 name: Umid.
+                style: |
+                  ha-card {
+                    box-shadow: 0px 0px 1px 1px rgba(42,109,214,.9); 
+                      }  
                 type: 'custom:mini-graph-card'
               - color_thresholds:
                   - color: '#00a7d1'
@@ -556,29 +692,29 @@ views:
                     value: 26
                 entities:
                   - sensor.sala_temperatura
-                style: |
-                  ha-card {
-                    box-shadow: 0px 0px 1px 1px rgba(42,109,214,.9); 
-                      }  
                 font_size: 55
                 labels: true
                 line_width: 5
                 name: Temp.
                 show: null
+                style: |
+                  ha-card {
+                    box-shadow: 0px 0px 1px 1px rgba(42,109,214,.9); 
+                      }  
                 type: 'custom:mini-graph-card'
             type: horizontal-stack
           - cards:
               - artwork: cover
                 entity: media_player.living_room
-                style: |
-                  ha-card {
-                    box-shadow: 0px 0px 1px 1px rgba(42,109,214,.9); 
-                      }  
                 hide:
                   power_state: false
                   source: true
                   volume: true
                 icon: 'mdi:google-home'
+                style: |
+                  ha-card {
+                    box-shadow: 0px 0px 1px 1px rgba(42,109,214,.9); 
+                      }  
                 styles:
                   card:
                     - height: 90px
@@ -586,9 +722,25 @@ views:
                 type: 'custom:mini-media-player'
             type: horizontal-stack
           - cards:
-              - entity: binary_sensor.porta_varanda
-                size: 30%
+              - entity: binary_sensor.porta_sala
                 icon: 'mdi:door-open'
+                size: 30%
+                styles:
+                  card:
+                    - height: 90px
+                    - box-shadow: '0px 0px 1px 1px rgba(42,109,214,.9)'
+                type: 'custom:button-card'
+              - entity: binary_sensor.porta_varanda
+                icon: 'mdi:door-open'
+                size: 30%
+                styles:
+                  card:
+                    - height: 90px
+                    - box-shadow: '0px 0px 1px 1px rgba(42,109,214,.9)'
+                type: 'custom:button-card'
+              - entity: binary_sensor.porta_cozinha
+                icon: 'mdi:door-open'
+                size: 30%
                 styles:
                   card:
                     - height: 90px
@@ -596,10 +748,6 @@ views:
                 type: 'custom:button-card'
             type: horizontal-stack
         type: vertical-stack
-      - entity: sensor.time
-        styles:
-          height: 170px
-        type: 'custom:bignumber-card'
       - entity: media_player.home
         hide:
           icon: false
@@ -621,19 +769,6 @@ views:
           platform: google
           show_group_count: true
         type: 'custom:mini-media-player'
-      - entities:
-          - entity: input_boolean.guests
-          - entity: input_boolean.feriado
-          - entity: input_boolean.casa_ocupada
-        show_header_toggle: false
-        theme: default
-        title: Flags
-        type: entities
-      - entity: weather.dark_sky
-        type: weather-forecast
-      - entities:
-          - entity: binary_sensor.movimento_cozinha
-        type: entities
     icon: 'mdi:home'
     main_config: true
     panel: false
@@ -1290,12 +1425,6 @@ views:
           - media_player.kitchen_speaker
         title: Cozinha
         type: picture-glance
-      - entities:
-          - entity: script.flash_lights
-          - entity: script.light_loop
-          - entity: script.light_loop_kill
-        title: Scripts
-        type: entities
       - camera_image: camera.livingroom_cam
         camera_view: live
         entities:
@@ -1303,6 +1432,27 @@ views:
           - media_player.living_room
         title: Sala
         type: picture-glance
+      - entity: alarm_control_panel.home_alarm
+        states:
+          - arm_home
+          - arm_away
+        type: alarm-panel
+      - entities:
+          - entity: binary_sensor.sala_pir
+          - entity: binary_sensor.escritorio_pir
+          - entity: binary_sensor.luiza_pir
+          - entity: binary_sensor.casal_pir
+          - entity: binary_sensor.closet_pir
+          - entity: binary_sensor.movimento_cozinha
+        show_header_toggle: false
+        title: Movimentos
+        type: entities
+      - entities:
+          - entity: script.flash_lights
+          - entity: script.light_loop
+          - entity: script.light_loop_kill
+        title: Scripts
+        type: entities
       - entities:
           - entity: device_tracker.life360_tatiana
           - entity: device_tracker.life360_luiz_lobao
@@ -1325,16 +1475,6 @@ views:
           - entity: device_tracker.life360_tatiana
         show_header_toggle: false
         title: Casa Ocupada ?
-        type: entities
-      - entities:
-          - entity: binary_sensor.sala_pir
-          - entity: binary_sensor.escritorio_pir
-          - entity: binary_sensor.luiza_pir
-          - entity: binary_sensor.casal_pir
-          - entity: binary_sensor.closet_pir
-          - entity: binary_sensor.movimento_cozinha
-        show_header_toggle: false
-        title: Movimentos
         type: entities
     icon: 'mdi:shield-home'
     main_config: true

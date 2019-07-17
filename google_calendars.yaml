@@ -1,0 +1,35 @@
+
+- cal_id: luiz.a.lobao@gmail.com
+  entities:
+  - device_id: luiz_lobao_gmail
+    ignore_availability: true
+    name: "Luiz Lobao Gmail"
+    track: true
+
+- cal_id: luiz@lobao.com
+  entities:
+  - device_id: luiz_lobao_com
+    ignore_availability: true
+    name: luiz@lobao.com
+    track: true
+
+- cal_id: lobao.com_lo26dtb4cggtl6u6k2n3gitovc@group.calendar.google.com
+  entities:
+  - device_id: x6racing
+    ignore_availability: true
+    name: X6racing
+    track: false
+
+- cal_id: addressbook#contacts@group.v.calendar.google.com
+  entities:
+  - device_id: contacts
+    ignore_availability: true
+    name: Contacts
+    track: false
+
+- cal_id: pt_br.brazilian#holiday@group.v.calendar.google.com
+  entities:
+  - device_id: feriados_no_brasil
+    ignore_availability: true
+    name: Feriados no Brasil
+    track: false

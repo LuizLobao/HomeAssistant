@@ -79,7 +79,11 @@ tts:
     watson_apikey: !secret watson_api
     voice: pt-BR_IsabelaVoice
 
+google:
+  client_id: !secret google_client_id
+  client_secret: !secret google_secret
 
+  
 panel_iframe:
   tasmoadmin:
     title: TasmoAdmin
