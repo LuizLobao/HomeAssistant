@@ -9,11 +9,12 @@ columns: 8
 global_parameters:
     use_comma: 0
     precision: 1
-    #use_hass_icon: 1
+    use_hass_icon: 1
     namespace: default
     devices:
       media_player:
         step: 5
+
 
 escritorio_teto:
     widget_type: switch
@@ -100,10 +101,25 @@ cafeteira_ok:
     icon_on: mdi-cup
     icon_off: mdi-cup-off
 
+alarme:
+    entity: alarm_control_panel.home_alarm
+    title: Alarme
+    widget_type: alarm
+    widget_style: "font-size: 120%"
+    title_style: "font-size: 130%"
+    state_style: "font-size: 120%"
+    panel_state_style: "font-size: 120%"
+    panel_code_style: "font-size: 120%"
+    panel_background_style: "font-size: 120%"
+    panel_button_style: "font-size: 120%"
+    icon_on: mdi-cup
+    
+
+
 
 layout: 
     - clock.clock(2x2), escritorio_teto, escritorio_cubo, escritorio_abajur
-    - suiteteto, suiteabajur, suiteled, bed_light
+    - suiteteto, suiteabajur, suiteled, bed_light, alarme(3x3)
     - switch.sonoff_100035a097_1, switch.sonoff_100035a097_2, switch.sonoff_100035a097_3, cafeteira
     - luiza_led
     - device_tracker.tatiana, device_tracker.luiz_lobao, visita, feriado, cafeteira_ok
