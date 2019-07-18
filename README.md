@@ -17,7 +17,7 @@
 <p>This is a screen grab of my main tab in Lovelace.</p>
 
 <div>
-<p> <img width=1347 height=625 src="Teste2_arquivos/image001.png"> </p>
+<p> <img width=1347 height=625 src="https://github.com/LuizLobao/HomeAssistant/blob/master/images/ha_home.PNG"> </p>
 
 </div>
 
