@@ -1,26 +1,26 @@
 
-- cal_id: luiz.a.lobao@gmail.com
+- cal_id: xxxxxx@gmail.com
   entities:
   - device_id: luiz_lobao_gmail
     ignore_availability: true
     name: "Luiz Lobao Gmail"
     track: true
 
-- cal_id: luiz@lobao.com
+- cal_id: xxxxxz@xxxxxx.com
   entities:
-  - device_id: luiz_lobao_com
+  - device_id: xxxxxxxxxm
     ignore_availability: true
-    name: luiz@lobao.com
+    name: xxxxx@xxxxx.com
     track: true
 
-- cal_id: lobao.com_lo26dtb4cggtl6u6k2n3gitovc@group.calendar.google.com
+- cal_id: lxxxxxxxxxxxxxxc@group.calendar.google.com
   entities:
   - device_id: x6racing
     ignore_availability: true
     name: X6racing
     track: false
 
-- cal_id: addressbook#contacts@group.v.calendar.google.com
+- cal_id: xxxxxxxxxxxxxxx@group.v.calendar.google.com
   entities:
   - device_id: contacts
     ignore_availability: true
